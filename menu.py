@@ -54,53 +54,54 @@ while(choice!=0):
                 choice=4             #Reset the "choice" to the value it had while entering the block
                 break
     elif choice==5:            #Linux
-        print("Enter:\n\t1 to start a service\n\t2 to stop a service\n\t3 to enable(permanently start) a service\n\t4 to disable(permanently stop) a service\n\t5 to install a software using yum (yum repository for the software must be configured)\n\t6 to uninstall a software using yum\n\t7 to view date and time\n\t8 to view calendar\n\t9 to view the details of a directory\n\t10 to view present working directory\n\t11 to open a file using gedit(GUI)\n\t12 to open a using vim(CLI)\n\t0 to EXIT")
-        choice=int(input())
-        if choice==1:
-            print("Enter service name")
-            name=input()
-            os.system("systemctl start {}".format(name))
-        elif choice==2:
-            print("Enter service name")
-            name=input()
-            os.system("systemctl stop {}".format(name))
-        elif choice==3:
-            print("Enter service name")
-            name=input()
-            os.system("systemctl enable {}".format(name))
-        elif choice==4:
-            print("Enter service name")
-            name=input()
-            os.system("systemctl disable {}".format(name))
-        elif choice==5:
-            print("Enter software name")
-            name=input()
-            os.system("yum install {}".format(name))
-        elif choice==6:
-            print("Enter software name")
-            name=input()
-            os.system("yum uninstall {}".format(name))
-        elif choice==7:
-            os.system("date")
-        elif choice==8:
-            os.system("cal")
-        elif choice==9:
-            print("Enter directory name/address")
-            name=input()
-            os.system("ls {}".format(name))
-        elif choice==10:
-            print("Present working directory is:")
-            os.system("pwd")
-        elif choice==11:
-            print("Enter file name/address")
-            name=input()
-            os.system("gedit {}".format(name))
-        elif choice==12:
-            print("Enter file name/address")
-            name=input()
-            os,system("vim {}".format(name))
-        elif choice==0:
-            choice=5
-            break
+        while True:
+            print("Enter:\n\t1 to start a service\n\t2 to stop a service\n\t3 to enable(permanently start) a service\n\t4 to disable(permanently stop) a service\n\t5 to install a software using yum (yum repository for the software must be configured)\n\t6 to uninstall a software using yum\n\t7 to view date and time\n\t8 to view calendar\n\t9 to view the details of a directory\n\t10 to view present working directory\n\t11 to open a file using gedit(GUI)\n\t12 to open a using vim(CLI)\n\t0 to EXIT")
+            choice=int(input())
+            if choice==1:
+                print("Enter service name")
+                name=input()
+                os.system("systemctl start {}".format(name))
+            elif choice==2:
+                print("Enter service name")
+                name=input()
+                os.system("systemctl stop {}".format(name))
+            elif choice==3:
+                print("Enter service name")
+                name=input()
+                os.system("systemctl enable {}".format(name))
+            elif choice==4:
+                print("Enter service name")
+                name=input()
+                os.system("systemctl disable {}".format(name))
+            elif choice==5:
+                print("Enter software name")
+                name=input()
+                os.system("yum install {}".format(name))
+            elif choice==6:
+                print("Enter software name")
+                name=input()
+                os.system("yum uninstall {}".format(name))
+            elif choice==7:
+                os.system("date")
+            elif choice==8:
+                os.system("cal")
+            elif choice==9:
+                print("Enter directory name/address")
+                name=input()
+                os.system("ls {}".format(name))
+            elif choice==10:
+                print("Present working directory is:")
+                os.system("pwd")
+            elif choice==11:
+                print("Enter file name/address")
+                name=input()
+                os.system("gedit {}".format(name))
+            elif choice==12:
+                print("Enter file name/address")
+                name=input()
+                os,system("vim {}".format(name))
+            elif choice==0:
+                choice=5
+                break
     elif choice!=0:
         print("Invalid Choice, please try again\n")
