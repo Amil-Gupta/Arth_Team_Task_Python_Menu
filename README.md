@@ -6,4 +6,4 @@
 - 4 - Docker Operations
 - 5 - Linux Operations
 
-//Each of these options opens a menu of sub-options for that category
+//Each of these options opens a sub-menu of options for that category
