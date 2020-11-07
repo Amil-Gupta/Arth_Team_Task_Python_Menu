@@ -8,8 +8,99 @@ while(choice!=0):
     choice=int(input())
     if choice==1:                #AWS
         printf("Delete this and write your code")
-    elif choice==2:            #Hadoop
-        printf("Delete this and write your code")
+
+    elif choice==2:
+        while True:
+            print("""
+            Press 1: To Configure the Master Node
+            Press 2: To Configure the Data Node
+            Press 3: To Configure the Client
+            Press 4: To See the Cluster Report
+            Press 5: To Run the TCPDUMP
+            Press 6: To Create a Directory in the Cluster
+            Press 7: To Create a Upload a File in the Cluster
+            Press 8: To Read a File in the Distributed File Storage
+            Press 9: To see the file structure
+            """)
+        
+            my_input = input("Enter your choice: ")
+            print(my_input)
+
+            if int(my_input) == 1:
+                ip_master = input("Enter Master Node IP: ")
+                print(ip_master)
+                os.system("scp hadoop-1.2.1-1.x86_64.rpm jdk-8u171-linux-x64.rpm hdfs-site.xml core-site.xml {}:\nchmod +x hadoop-1.2.1-1.x86_64.rpm jdk-8u171-linux-x64.rpm".format(ip_master))
+                os.system("ssh {} rpm -ivh jdk-8u171-linux-x64.rpm".format(ip_master))
+                os.system("ssh {} rpm -ivh hadoop-1.2.1-1.x86_64.rpm --force".format(ip_master))
+    
+                my_name_dir = input("Enter directory name for Master Node: ")
+                print(my_name_dir)
+                os.system("mkdir /{}".format(my_name_dir))
+                os.system("hadoop namenode -format") 
+                os.system("hadoop-daemon.sh start namenode")
+
+    #mytree = ET.parse('hdfs-site.xml')
+    #myroot = mytree.getroot()
+    #myroot[0]
+
+    #src_file1 = "hdfs-site.xml"
+    #dest_path1 = "/etc/hadoop/hdfs-site.xml"
+    #shutil.copy(src_file1, dest_path1)
+    
+    #with open("hdfs-site.xml") as f:
+        #with open("hdfs.xml", "w") as f1:
+            #for line in f:
+                    #f1.write(line)
+            
+    
+    
+    #src_file2 = "core-site.xml"
+    #dest_path2 = "/etc/hadoop/hdfs-site.xml"
+    #shutil.copy(src_file2, dest_path2)
+
+            elif int(my_input) == 2:
+                ip_slave = input("Enter Slave Node IP: ")
+                print(ip_slave)
+                os.system("scp hadoop-1.2.1-1.x86_64.rpm jdk-8u171-linux-x64.rpm  {}:\nchmod +x hadoop-1.2.1-1.x86_64.rpm jdk-8u171-linux-x64.rpm".format(ip_slave))
+                os.system("ssh {} rpm -ivh jdk-8u171-linux-x64.rpm".format(ip_slave))
+                os.system("ssh {} rpm -ivh hadoop-1.2.1-1.x86_64.rpm --force".format(ip_slave))
+
+                my_data_dir = input("Enter directory name for Data Node: ")
+                print(my_name_dir)
+                os.system("mkdir /{}".format(my_data_dir)) 
+                os.system("hadoop-daemon.sh start datanode") 
+
+            elif int(my_input) == 3:
+                ip_client = input("Enter Client IP: ")
+                print(ip_client)
+                os.system("scp hadoop-1.2.1-1.x86_64.rpm jdk-8u171-linux-x64.rpm  {}:\nchmod +x hadoop-1.2.1-1.x86_64.rpm jdk-8u171-linux-x64.rpm".format(ip_client))
+                os.system("ssh {} rpm -ivh jdk-8u171-linux-x64.rpm".format(ip_client))
+                os.system("ssh {} rpm -ivh hadoop-1.2.1-1.x86_64.rpm --force".format(ip_client))
+
+            elif int(my_input) == 4:
+                os.system("hadoop dfsadmin -report | less")
+
+            elif int(my_input) == 5:
+                os.system("ssh {} tcpdump -i enp0s3 tcp port 9001 -n not ssh 22".format(ip_client))
+                os.system("ssh {} tcpdump -i enp0s3 tcp port 9001 -n not ssh 22".format(ip_master))
+                os.system("ssh {} tcpdump -i enp0s3 tcp port 9001 -n not ssh 22".format(ip_slave))
+
+            elif int(my_input) == 6:
+                os.system("ssh {} hadoop fs -mkdir /mydir".format(ip_client))
+
+            elif int(my_input) == 7:
+                os.system("ssh {} hadoop fs -put myfile.txt".format(ip_client))
+
+            elif int(my_input) == 8:
+                os.system("ssh {} hadoop fs -cat /myfile.txt".format(ip_client))
+
+            elif int(my_input) == 9:
+                os.system("ssh {} hadoop fs -ls /".format(ip_client))
+
+    else: 
+                print("Option not supported")
+
+
     elif choice==3:            #Networking
         printf("Delete this and write your code")
     elif choice==4:            #Docker
