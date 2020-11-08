@@ -4,7 +4,13 @@ choice=1
 name=""
 img_name=""
 while(choice!=0):
-    print("Enter:\n\t1 for AWS Operations\n\t2 for Hadoop Operations\n\t3 for Networking Operations\n\t4 for Docker Operations\n\t5 for other Linux Operations\n\t0 to EXIT")
+    print("""Enter:
+\t1 for AWS Operations
+\t2 for Hadoop Operations
+\t3 for Networking Operations
+\t4 for Docker Operations
+\t5 for other Linux Operations
+\t0 to EXIT""")
     choice=int(input())
     if choice==1:                #AWS
         print("Delete this and write your code")
