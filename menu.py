@@ -12,15 +12,17 @@ while(choice!=0):
     elif choice==2:
         while True:
             print("""
-            Press 1: To Configure the Master Node
-            Press 2: To Configure the Data Node
-            Press 3: To Configure the Client
-            Press 4: To See the Cluster Report
-            Press 5: To Run the TCPDUMP
-            Press 6: To Create a Directory in the Cluster
-            Press 7: To Create a Upload a File in the Cluster
-            Press 8: To Read a File in the Distributed File Storage
-            Press 9: To see the file structure
+Enter:
+\t1 To Configure the Master Node
+ \t2 To Configure the Data Node
+\t3 To Configure the Client
+\t4 To See the Cluster Report
+\t5 To Run the TCPDUMP
+\t6 To Create a Directory in the Cluster
+\t7 To Create a Upload a File in the Cluster
+\t8 To Read a File in the Distributed File Storage
+\t9 To see the file structure
+\t0 to EXIT
             """)
         
             my_input = input("Enter your choice: ")
@@ -96,7 +98,8 @@ while(choice!=0):
 
             elif int(my_input) == 9:
                 os.system("ssh {} hadoop fs -ls /".format(ip_client))
-
+            elif int(my_input) == 0:
+                break
             else: 
                 print("Option not supported")
 
