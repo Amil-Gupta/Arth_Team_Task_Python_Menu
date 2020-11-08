@@ -31,7 +31,7 @@ Enter:
 \t0 to EXIT
             """)
         
-            my_input = input("Enter your choice: ")
+            my_input = input()
             print(my_input)
 
             if int(my_input) == 1:
