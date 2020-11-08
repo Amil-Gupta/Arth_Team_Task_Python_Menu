@@ -7,6 +7,7 @@ ip_master=""
 ip_client=""
 ip_slave=""
 my_input=""
+os.system("clear")
 while(choice!=0):
     print("""Enter:
 \t1 for AWS Operations
@@ -16,6 +17,7 @@ while(choice!=0):
 \t5 for other Linux Operations
 \t0 to EXIT to console""")
     choice=int(input())
+    os.system("clear")
     if choice==1:                #AWS
         print("Delete this and write your code")
 
@@ -35,6 +37,8 @@ Enter:
 \t0 to EXIT to main menu """)
         
             my_input = input()
+            
+            os.system("clear")
 
             if int(my_input) == 1:
                 ip_master = input("Enter Master Node IP: ")
@@ -128,6 +132,7 @@ Enter:
 \t7 to list all images
 \t0 to EXIT to main menu""");
             choice=int(input())
+            os.system("clear")
             if choice==1:
                 print("Enter container name")
                 name=input()
@@ -186,6 +191,7 @@ Enter:
 \t-1 to run your own CLI command
 \t0 to EXIT""")
             choice=int(input())
+            os.system("clear")
             if choice==1:
                 print("Enter service name")
                 name=input()
