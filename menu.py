@@ -3,6 +3,10 @@ import os
 choice=1
 name=""
 img_name=""
+ip_master=""
+ip_client=""
+ip_slave=""
+my_input=""
 while(choice!=0):
     print("""Enter:
 \t1 for AWS Operations
@@ -10,7 +14,7 @@ while(choice!=0):
 \t3 for Networking Operations
 \t4 for Docker Operations
 \t5 for other Linux Operations
-\t0 to EXIT""")
+\t0 to EXIT to console""")
     choice=int(input())
     if choice==1:                #AWS
         print("Delete this and write your code")
@@ -28,11 +32,9 @@ Enter:
 \t7 To Create a Upload a File in the Cluster
 \t8 To Read a File in the Distributed File Storage
 \t9 To see the file structure
-\t0 to EXIT
-            """)
+\t0 to EXIT to main menu """)
         
             my_input = input()
-            print(my_input)
 
             if int(my_input) == 1:
                 ip_master = input("Enter Master Node IP: ")
@@ -105,6 +107,7 @@ Enter:
             elif int(my_input) == 9:
                 os.system("ssh {} hadoop fs -ls /".format(ip_client))
             elif int(my_input) == 0:
+                choice=2
                 break
             else: 
                 print("Option not supported")
@@ -114,7 +117,16 @@ Enter:
         print("Delete this and write your code")
     elif choice==4:            #Docker
         while True:             #As exit condition has been provided within the loop itself
-            print("Enter:\n\t1 to run a container\n\t2 to start a container\n\t3 to stop a container\n\t4 to remove a container\n\t5 to view logs for a container\n\t6 to list all containers\n\t7 to list all images\n\t0 to EXIT to main menu");
+            print("""
+Enter:
+\t1 to run a container
+\t2 to start a container
+\t3 to stop a container
+\t4 to remove a container
+\t5 to view logs for a container
+\t6 to list all containers
+\t7 to list all images
+\t0 to EXIT to main menu""");
             choice=int(input())
             if choice==1:
                 print("Enter container name")
@@ -153,9 +165,26 @@ Enter:
             elif choice==0:
                 choice=4             #Reset the "choice" to the value it had while entering the block
                 break
+            else:
+                print("Option Not Supported")
     elif choice==5:            #Linux
         while True:
-            print("Enter:\n\t1 to start a service\n\t2 to stop a service\n\t3 to enable(permanently start) a service\n\t4 to disable(permanently stop) a service\n\t5 to install a software using yum (yum repository for the software must be configured)\n\t6 to uninstall a software using yum\n\t7 to view date and time\n\t8 to view calendar\n\t9 to view the details of a directory\n\t10 to view present working directory\n\t11 to open a file using gedit(GUI)\n\t12 to open a using vim(CLI)\n\t0 to EXIT")
+            print("""
+Enter:
+\t1 to start a service
+\t2 to stop a service
+\t3 to enable(permanently start) a service
+\t4 to disable(permanently stop) a service
+\t5 to install a software using yum (yum repository for the software must be configured)
+\t6 to uninstall a software using yum
+\t7 to view date and time
+\t8 to view calendar
+\t9 to view the details of a directory
+\t10 to view present working directory
+\t11 to open a file using gedit(GUI)
+\t12 to open a using vim(CLI)
+\t-1 to run your own CLI command
+\t0 to EXIT""")
             choice=int(input())
             if choice==1:
                 print("Enter service name")
@@ -200,8 +229,14 @@ Enter:
                 print("Enter file name/address")
                 name=input()
                 os,system("vim {}".format(name))
+            elif choice==-1:
+                print("Enter your CLI command below")
+                name=input()
+                os.system(name)
             elif choice==0:
                 choice=5
                 break
+            else:
+                print("Option Not Supported")
     elif choice!=0:
         print("Invalid Choice, please try again\n")
