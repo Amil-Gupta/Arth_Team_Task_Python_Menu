@@ -97,7 +97,7 @@ while(choice!=0):
             elif int(my_input) == 9:
                 os.system("ssh {} hadoop fs -ls /".format(ip_client))
 
-    else: 
+            else: 
                 print("Option not supported")
 
 
