@@ -7,7 +7,7 @@ while(choice!=0):
     print("Enter:\n\t1 for AWS Operations\n\t2 for Hadoop Operations\n\t3 for Networking Operations\n\t4 for Docker Operations\n\t5 for other Linux Operations\n\t0 to EXIT")
     choice=int(input())
     if choice==1:                #AWS
-        printf("Delete this and write your code")
+        print("Delete this and write your code")
 
     elif choice==2:
         while True:
@@ -102,7 +102,7 @@ while(choice!=0):
 
 
     elif choice==3:            #Networking
-        printf("Delete this and write your code")
+        print("Delete this and write your code")
     elif choice==4:            #Docker
         while True:             #As exit condition has been provided within the loop itself
             print("Enter:\n\t1 to run a container\n\t2 to start a container\n\t3 to stop a container\n\t4 to remove a container\n\t5 to view logs for a container\n\t6 to list all containers\n\t7 to list all images\n\t0 to EXIT to main menu");
