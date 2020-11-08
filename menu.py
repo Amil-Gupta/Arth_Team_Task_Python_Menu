@@ -24,7 +24,7 @@ while(choice!=0):
             print("""
 Enter:
 \t1 To Configure the Master Node
- \t2 To Configure the Data Node
+\t2 To Configure the Data Node
 \t3 To Configure the Client
 \t4 To See the Cluster Report
 \t5 To Run the TCPDUMP
