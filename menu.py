@@ -1,4 +1,5 @@
 import os
+from termcolor import colored
 
 choice=1
 name=""
@@ -9,13 +10,13 @@ ip_slave=""
 my_input=""
 os.system("clear")
 while(choice!=0):
-    print("""Enter:
+    print(colored("""Enter:
 \t1 for AWS Operations
 \t2 for Hadoop Operations
 \t3 for Networking Operations
 \t4 for Docker Operations
 \t5 for other Linux Operations
-\t0 to EXIT to console""")
+\t0 to EXIT to console""",'blue'))
     choice=int(input())
     os.system("clear")
     if choice==1:                #AWS
@@ -23,7 +24,7 @@ while(choice!=0):
 
     elif choice==2:
         while True:
-            print("""
+            print(colored("""
 Enter:
 \t1 To Configure the Master Node
 \t2 To Configure the Data Node
@@ -34,7 +35,7 @@ Enter:
 \t7 To Create a Upload a File in the Cluster
 \t8 To Read a File in the Distributed File Storage
 \t9 To see the file structure
-\t0 to EXIT to main menu """)
+\t0 to EXIT to main menu """,'yellow'))
         
             my_input = input()
             
@@ -121,7 +122,7 @@ Enter:
         print("Delete this and write your code")
     elif choice==4:            #Docker
         while True:             #As exit condition has been provided within the loop itself
-            print("""
+            print(colored("""
 Enter:
 \t1 to run a container
 \t2 to start a container
@@ -130,7 +131,7 @@ Enter:
 \t5 to view logs for a container
 \t6 to list all containers
 \t7 to list all images
-\t0 to EXIT to main menu""");
+\t0 to EXIT to main menu""",'yellow'));
             choice=int(input())
             os.system("clear")
             if choice==1:
@@ -174,7 +175,7 @@ Enter:
                 print("Option Not Supported")
     elif choice==5:            #Linux
         while True:
-            print("""
+            print(colored("""
 Enter:
 \t1 to start a service
 \t2 to stop a service
@@ -189,7 +190,7 @@ Enter:
 \t11 to open a file using gedit(GUI)
 \t12 to open a using vim(CLI)
 \t-1 to run your own CLI command
-\t0 to EXIT""")
+\t0 to EXIT""",'yellow'))
             choice=int(input())
             os.system("clear")
             if choice==1:
