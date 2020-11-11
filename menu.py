@@ -20,7 +20,49 @@ while(choice!=0):
     choice=int(input())
     os.system("clear")
     if choice==1:                #AWS
-        print("Delete this and write your code")
+        print(colored("""
+Enter:
+\t1 To check the version of aws installed
+\t2 To refer to the aws documentation for help
+\t3 To login to a user
+\t4 To show all the available instances
+\t5 To describe all the tags of ec2 instances
+\t6 To describe the all the subnets
+\t7 To describe the all the vpc
+\t8 To describe all the volumes
+\t9 To describe key-pairs
+\t10 To describe security groups
+\t11 To describe all the available regions
+\t12 To create a key-pair
+\t12 To create a security group
+\t13 To create an instance
+\t14 To create EBS storage
+\t15 To attach EBS storage to an instance
+\t16 To create cloudfront distriution
+\t17 To create S3 bucket and add files
+\t18 To stop an instance
+\t19 To terminate an instance
+\t20 To detach volume and delete it
+\t21 To delete S3 bucket and its contents
+\t22 To delete key pair
+\t23 To delete cloudfront distribution
+\t0 To EXIT to the main menu """,'yellow'))
+        my_input = input()
+
+        os.system("clear")
+
+        if int(my_input) == 1:
+            os.system("aws --version")
+
+        elif int(my_input) == 2:
+            os.system("aws help")
+
+        elif int(my_input) == 3:
+            os.system("aws ec2 describe-instances")
+
+        elif int(my_input) == 4:
+            os.system("aws ec2 describe-tags")
+
 
     elif choice==2:
         while True:
