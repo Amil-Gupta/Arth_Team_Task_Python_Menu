@@ -36,18 +36,18 @@ Enter:
 \t10 To describe security groups
 \t11 To describe all the available regions
 \t12 To create a key-pair
-\t12 To create a security group
-\t13 To create an instance
-\t14 To create EBS storage
-\t15 To attach EBS storage to an instance
-\t16 To create cloudfront distriution
-\t17 To create S3 bucket and add files
-\t18 To stop an instance
-\t19 To terminate an instance
-\t20 To detach volume and delete it
-\t21 To delete S3 bucket and its contents
-\t22 To delete key pair
-\t23 To delete cloudfront distribution
+\t13 To create a security group
+\t14 To create an instance
+\t15 To create EBS storage
+\t16 To attach EBS storage to an instance
+\t17 To create cloudfront distriution
+\t18 To create S3 bucket and add files
+\t19 To stop an instance
+\t20 To terminate an instance
+\t21 To detach volume and delete it
+\t22 To delete S3 bucket and its contents
+\t23 To delete key pair
+\t24 To delete cloudfront distribution
 \t0 To EXIT to the main menu """,'yellow'))
         my_input = input()
 
@@ -95,6 +95,7 @@ Enter:
             print("Wait for a moment!")
             os.system("aws ec2 describe-key-pairs --key-name {}".format(keyname))
         elif int(my_input) == 13:
+            print("Creating security Group")
             groupname = input("Enter the groupname")
             os.system("clear")
             desc = input("Description")
@@ -104,14 +105,14 @@ Enter:
             sgid = input("Enter security group id") 
             os.system("aws ec2  describe-security-groups --group-id".format(sgid))
         elif int(my_input) == 14:
-            os.system("aws  ec2 describe-images --query "Images[*].{Architecture:Architecture,ImageId:ImageId,PlatformDetails:PlatformDetails,VirtualizationType:VirtualizationType}" --output json")
+            os.system("aws  ec2 describe-images --query \"Images[*].{Architecture:Architecture,ImageId:ImageId,PlatformDetails:PlatformDetails,VirtualizationType:VirtualizationType}\" --output json")
             imageid = input("Enter the image id")
             count = input("No of instances required")
-            os.system("aws ec2 describe-instance-types  --query "InstanceTypes[*].{InstanceType:InstanceType}" --output json")
+            os.system("aws ec2 describe-instance-types  --query \"InstanceTypes[*].{InstanceType:InstanceType}\" --output json")
             instType = input("The instance type like t2.nano,t2.micro,t2.small,etc")
             os.system("aws ec2 describe-key-pairs --query \"KeyPairs[*].{KeyName:KeyName}\" --output json")
             keyname = input("Enter key name which already exists")
-            os.system("aws ec2 describe-security-groups --query "SecurityGroups[*].{GroupId:GroupId}" --output json")
+            os.system("aws ec2 describe-security-groups --query \"SecurityGroups[*].{GroupId:GroupId}\" --output json")
             sgid = input("Enter valid Security group id")
             key = input("For tag, enter the key")
             value = input("For tag, enter the value")
@@ -135,12 +136,28 @@ Enter:
 
     #    elif int(my_input) == 18:
 
-     #   elif int(my_input) == 19:
+        elif int(my_input) == 19:
+            os.system("aws ec2 describe-volumes  --query \"Volumes[*].Attachments[*].{InstanceId:InstanceId}\" --output json")
+            instId = input("Enter the Instance ID from the above list")
+            os.system("aws ec2 stop-instances --instance-ids {}".format(instId))
 
-      #  elif int(my_input) == 20:
-       # elif int(my_input) == 21:
+        elif int(my_input) == 20:
+            os.system("aws ec2 describe-volumes  --query \"Volumes[*].Attachments[*].{InstanceId:InstanceId}\" --output json")
+            instId = input("Enter the Instance ID from the above list")
+            os.system("aws ec2 terminate-instances --instance-ids {}".format(instId))
+
+        elif int(my_input) == 21:
+            os.system("aws ec2 describe-volumes  --query \"Volumes[*].Attachments[*].{VolumeId:VolumeId}\" --output json")
+            volId = input("Enter the Volume ID from the above list")
+            os.system("aws ec2 detach-volume  --volume-id {}".format(volId))
+            os.system("aws ec2 delete-volume  --volume-id {}".format(volId))
+
         #elif int(my_input) == 22:
-#        elif int(my_input) == 12:
+        elif int(my_input) == 23:
+            os.system("aws ec2 describe-key-pairs --query \"KeyPairs[*].{KeyName:KeyName}\" --output json")
+            keyname = input("Enter key name which already exists")
+            os.system("aws ec2 delete-key-pair --key-name {}".format())
+
     elif choice==2:
         while True:
             print(colored("""
