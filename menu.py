@@ -8,6 +8,8 @@ ip_master=""
 ip_client=""
 ip_slave=""
 my_input=""
+keyname = ""
+sgid = ""
 os.system("clear")
 while(choice!=0):
     print(colored("""Enter:
@@ -58,12 +60,87 @@ Enter:
             os.system("aws help")
 
         elif int(my_input) == 3:
-            os.system("aws ec2 describe-instances")
+            os.system("aws configure")
 
         elif int(my_input) == 4:
+            os.system("aws ec2 describe-instances")
+
+        elif int(my_input) == 5:
             os.system("aws ec2 describe-tags")
 
+        elif int(my_input) == 6:
+            os.system("aws ec2 describe-subnets")
 
+        elif int(my_input) == 7:
+            os.system("aws ec2 describe-vpcs")
+
+#        elif int(my_input) == 7:
+ #           os.system("aws ec2 describe-hosts")
+
+        elif int(my_input) == 8:
+            os.system("aws ec2 describe-volumes")
+
+        elif int(my_input) == 9:
+            os.system("aws ec2 describe-key-pairs")
+
+        elif int(my_input) == 10:
+            os.system("aws ec2 describe-security-groups")
+
+        elif int(my_input) == 11:
+            os.system("aws ec2 describe-regions")
+        
+        elif int(my_input) == 12:
+            keyname =input("The name of the key:")
+            os.system("aws ec2 create-key-pair --key-name {0} --query \"KeyMaterial\" > {0}.pem".format(keyname))
+            print("Wait for a moment!")
+            os.system("aws ec2 describe-key-pairs --key-name {}".format(keyname))
+        elif int(my_input) == 13:
+            groupname = input("Enter the groupname")
+            os.system("clear")
+            desc = input("Description")
+            vpcid = input("Enter the vpc id")
+            os.system("aws ec2 create-security-group --group-name {} --description \"{}\" --vpc-id {}".format(groupname,desc,vpcid))
+            #allow the routes
+            sgid = input("Enter security group id") 
+            os.system("aws ec2  describe-security-groups --group-id".format(sgid))
+        elif int(my_input) == 14:
+            os.system("aws  ec2 describe-images --query "Images[*].{Architecture:Architecture,ImageId:ImageId,PlatformDetails:PlatformDetails,VirtualizationType:VirtualizationType}" --output json")
+            imageid = input("Enter the image id")
+            count = input("No of instances required")
+            os.system("aws ec2 describe-instance-types  --query "InstanceTypes[*].{InstanceType:InstanceType}" --output json")
+            instType = input("The instance type like t2.nano,t2.micro,t2.small,etc")
+            os.system("aws ec2 describe-key-pairs --query \"KeyPairs[*].{KeyName:KeyName}\" --output json")
+            keyname = input("Enter key name which already exists")
+            os.system("aws ec2 describe-security-groups --query "SecurityGroups[*].{GroupId:GroupId}" --output json")
+            sgid = input("Enter valid Security group id")
+            key = input("For tag, enter the key")
+            value = input("For tag, enter the value")
+            os.system("aws ec2 run-instances --image-id  {} --count {} --instance-type {} --key-name {} --security-group-ids {} --tag-specifications  ResourceType=instance,Tags=[{Key={},Value={}}]".format(imageid,count,instType,keyname,sgid,key,value))
+        elif int(my_input) == 15:
+            print("The Amazon EBS volume type. This can be gp2 for General Purpose SSD, io1 or io2 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.")
+            volType = input("Enter the volume type")
+            size = input("Enter the size")
+            os.system("aws ec2 describe-availability-zones  --query \"AvailabilityZones[*].{RegionName:RegionName}\" --output json")
+            AZ = input("Enter the Availability Zone")
+            key = input("For tag, enter the key")
+            value = input("For tag, enter the value")
+            os.system("aws ec2 create-volume --volume-type {} --size {} --availability-zone {} --tag-specifications  ResourceType=volume,Tags=[{Key={},Value={}}]".format(volType,size,AZ,key,value))
+        elif int(my_input) == 16:
+            os.system("aws ec2 describe-volumes  --query \"Volumes[*].Attachments[*].{InstanceId:InstanceId,VolumeId:VolumeId}\" --output json")
+            volId = input("Enter the Volume ID from the above list")
+            instId = input("Enter the Instance ID from the above list")
+            os.system("aws ec2 attach-volume --volume-id {} --instance-id {} --device /dev/sdf".format(volId,instId))
+        #elif int(my_input) == 17:
+
+
+    #    elif int(my_input) == 18:
+
+     #   elif int(my_input) == 19:
+
+      #  elif int(my_input) == 20:
+       # elif int(my_input) == 21:
+        #elif int(my_input) == 22:
+#        elif int(my_input) == 12:
     elif choice==2:
         while True:
             print(colored("""
