@@ -45,15 +45,14 @@ Enter:
 \t19 To stop an instance
 \t20 To terminate an instance
 \t21 To detach volume and delete it
-\t22 To delete S3 bucket and its contents
-\t23 To delete key pair
-\t24 To delete cloudfront distribution
+\t22 To delete key pair
 \t0 To EXIT to the main menu """,'yellow'))
         my_input = input()
 
         os.system("clear")
 
         if int(my_input) == 1:
+            print("CHECK THE VERSION OF AWS INSTALLED")
             os.system("aws --version")
 
         elif int(my_input) == 2:
@@ -131,10 +130,20 @@ Enter:
             volId = input("Enter the Volume ID from the above list")
             instId = input("Enter the Instance ID from the above list")
             os.system("aws ec2 attach-volume --volume-id {} --instance-id {} --device /dev/sdf".format(volId,instId))
-        #elif int(my_input) == 17:
-
-
-    #    elif int(my_input) == 18:
+        elif int(my_input) == 18:
+            bucketName = input("Enter the name of the S3 bucket.Note it should be unique")
+            acl = input("Possible values:private, public-read, public-read-write, authenticated-read. Enter som")
+            os.system("aws ec2 describe-regions --query \"Regions[*].{RegionName:RegionName}\" --output json")
+            region = input("Enter a valid region name")
+            os.system("aws s3api create-bucket --bucket {}  --acl {}  --region {}".format(bucketName,acl,region))
+            key = input("Enter the path you  want to save in the S3 bucket")
+            body = input("Enter the path of the object you want to put in the location")
+            os.system("aws s3api put-object --acl {} --bucket {} --key {} --body {}".format(acl,bucketName,key,body))
+        elif int(my_input) == 17:
+            os.system("aws s3 ls")
+            bucketNamePresent = input("Enter the name of the S3 bucket")
+            rootObject = input("Enter the path of the object")
+            os.system("aws cloudfront create-distribution --origin-domain-name {}.s3.amazonaws.com --default-root-object {}".format(bucketNamePresent,rootObject))
 
         elif int(my_input) == 19:
             os.system("aws ec2 describe-volumes  --query \"Volumes[*].Attachments[*].{InstanceId:InstanceId}\" --output json")
@@ -153,7 +162,8 @@ Enter:
             os.system("aws ec2 delete-volume  --volume-id {}".format(volId))
 
         #elif int(my_input) == 22:
-        elif int(my_input) == 23:
+         #   os.system("")
+        elif int(my_input) == 22:
             os.system("aws ec2 describe-key-pairs --query \"KeyPairs[*].{KeyName:KeyName}\" --output json")
             keyname = input("Enter key name which already exists")
             os.system("aws ec2 delete-key-pair --key-name {}".format())
